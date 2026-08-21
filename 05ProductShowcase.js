@@ -57,7 +57,6 @@ function createImageIntroduction() {
 }
 
 function createElementImage(src, parent) {
-
     const img = document.createElement("img");
     if (typeof(parent) === "string") {document.getElementById(parent).appendChild(img);}
     else {parent.appendChild(img)}
