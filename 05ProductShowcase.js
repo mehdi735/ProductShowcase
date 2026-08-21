@@ -32,7 +32,7 @@ onload = async function () {
     //if (localStorage.getItem("products")) {products=JSON.parse(localStorage.getItem("products"));}
 }
 
-function createImgaeIntroduction() {
+function createImageIntroduction() {
     const imageInput = document.getElementById("imageInput");
     imageInput.addEventListener("change", function (){
         if (this.value.length === 0) {return;}
@@ -57,6 +57,8 @@ function createImgaeIntroduction() {
 }
 
 function createElementImage(src, parent) {
+    if (!src.startsWith("http")) {src = pathServer + src.replace(/^\//, '')};
+
     const img = document.createElement("img");
     if (typeof(parent) === "string") {document.getElementById(parent).appendChild(img);}
     else {parent.appendChild(img)}
