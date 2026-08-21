@@ -57,6 +57,8 @@ function createImageIntroduction() {
 }
 
 function createElementImage(src, parent) {
+    if (!src.startsWith("http") && !src.startsWith("blob")) {src = pathServer + src.replace(/^\//, '')};
+
     const img = document.createElement("img");
     if (typeof(parent) === "string") {document.getElementById(parent).appendChild(img);}
     else {parent.appendChild(img)}
