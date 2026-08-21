@@ -1,0 +1,15 @@
+__pycach__/
+myenv/
+venv/
+static/
+*.pyc
+.env
+
+*.db
+*.sqlite
+
+.vscode/
+.idea/
+
+.DS_Store
+.Thumbs.db
