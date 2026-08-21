@@ -4,8 +4,10 @@ let imagesInput = [];
 let imageFiles = [];
 let temporaryFeatures = [];
 
+const pathServer = "https://productshowcase-lhrz.onrender.com/"
+
 onload = async function () {
-    const res = await fetch("http://localhost:8000/products");
+    const res = await fetch(`${pathServer}products`);
     const data = await res.json();
 
     if (data.product.length !== 0) {
@@ -241,7 +243,7 @@ async function saveIntroductionInServer(_product) {
 
     for (let image of imageFiles) {formData.append("image_files", image)}
 
-    const res = await fetch("http://localhost:8000/products", {
+    const res = await fetch(`${pathServer}products`, {
         method: "POST",
         body: formData
     })
