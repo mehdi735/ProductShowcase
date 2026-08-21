@@ -103,6 +103,7 @@ function clearCreateIntroductionPage() {
     temporaryFeatures = [];
     document.getElementById("explanation").value = '';
     imagesInput = [];
+    imageFiles = []
 
     document.getElementById("featuresInput").value = '';
 
