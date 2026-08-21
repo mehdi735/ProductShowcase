@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="05ProductShowcase.css">
+        <title>ProductShowcase</title>
+    </head>
+    
+    <body>
+        <script src="05ProductShowcase.js"></script>
+
+        <div id="selectionPage">
+            <button id="introductionButton" onclick="showCreateIntroduction()">معرفی محصول</button>
+            <button id="showcase-button" onclick="showShowcase()">ویترین</button>
+        </div>
+
+        <div id="createIntroduction">
+            <div id="editActionButtons">
+                <button id="canselButton" onclick="canselIntroduction()">لغو</button>
+                <button id="saveButton" onclick="saveIntroduction()">ذخیره</button>
+            </div>
+
+            <label>نام محصول</label><br>
+            <input type="text" id="title" placeholder="نام محصول را وارد کنید"><br>
+
+            <label>افزودن ویژگی</label><br>
+            <input type="text" id="featuresInput" placeholder="ویژگی های محصول را بگویید">
+            <button onclick="addFeature()">افزودن</button><br>
+
+            <ul id="featuresIntroduction"></ul>
+
+            <label>توضیح</label><br>
+            <textarea rows="30" cols="100" id="explanation" placeholder="درباره محضول تان توضیح دهید"></textarea><br>
+
+            <input type="file" accept="image/*" id="imageInput">
+            <label for="imageInput" id="imagesLabel" onclick="createImgaeIntroduction()">تصاویر تان را وارد کنید</label>
+
+            <div id="imagesIntroduction"></div>
+        </div>
+
+        <div id="showcase">
+            <button id="backOfPage" onclick="hideShowcase()">برگشت</button>
+        </div>
+
+    </body>
+</html>
