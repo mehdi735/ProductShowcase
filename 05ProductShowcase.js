@@ -252,23 +252,6 @@ async function saveIntroductionInServer(_product) {
     const data = await res.json();
 }
 
-
-const testData = {
-    name: "test",
-    features: ["a"],
-    explanation: "test",
-    images_urls: []
-};
-
-fetch("https://productshowcase-lhrz.onrender.com/test", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(testData)
-})
-.then(r => r.json())
-.then(console.log)
-.catch(console.error);
-
 const fd = new FormData();
 fd.append("product_string", JSON.stringify({name: "test", features: [], explanation: "", images_urls: []}));
 
