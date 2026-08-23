@@ -41,7 +41,7 @@ def get_product_by_id(id:int, db:Session=Depends(get_db)):
     return {"product": product, "product_feature": product_feature, "product_image": product_image}
 
 @app.post("/products")
-def post_product(product_string:str=Form(...), db:Session=Depends(get_db)):
+def post_product(product_string:str=Form(...), image_files:List[UploadFile]=File(None), db:Session=Depends(get_db)):
     product = ProductCreate(**json.loads(product_string))
     new_product = Product(name=product.name, explanation=product.explanation)
     db.add(new_product)
