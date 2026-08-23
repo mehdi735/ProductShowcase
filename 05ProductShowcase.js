@@ -268,3 +268,14 @@ fetch("https://productshowcase-lhrz.onrender.com/test", {
 .then(r => r.json())
 .then(console.log)
 .catch(console.error);
+
+const fd = new FormData();
+fd.append("product_string", JSON.stringify({name: "test", features: [], explanation: "", images_urls: []}));
+
+fetch("https://productshowcase-lhrz.onrender.com/products", {
+    method: "POST",
+    body: fd
+})
+.then(r => r.json())
+.then(console.log)
+.catch(console.error);
