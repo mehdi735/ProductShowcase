@@ -53,16 +53,16 @@ def post_product(product_string:str=Form(...), image_files:List[UploadFile]=File
         new_feature = ProductFeature(name=feature, product_id=new_product.id)
         db.add(new_feature)
 
-    for image in image_files:
-        ext = image.filename.split(".")[-1]
-        filename = f"{uuid.uuid4()}.{ext}"
-        path = f"static/images/{filename}"
+    #for image in image_files:
+    #    ext = image.filename.split(".")[-1]
+    #    filename = f"{uuid.uuid4()}.{ext}"
+    #    path = f"static/images/{filename}"
 
-        with open(path, "wb") as i:
-            i.write(image.file.read())
+    #    with open(path, "wb") as i:
+    #        i.write(image.file.read())
 
-        product_image = ProductImage(image_url=path, product_id=new_product.id)
-        db.add(product_image)
+    #    product_image = ProductImage(image_url=path, product_id=new_product.id)
+    #    db.add(product_image)
 
     db.commit()
 

@@ -242,7 +242,7 @@ async function saveIntroductionInServer(_product) {
     const formData = new FormData();
     formData.append("product_string", JSON.stringify(_product));
 
-    for (let image of imageFiles) {formData.append("image_files", image)}
+    //for (let image of imageFiles) {formData.append("image_files", image)}
 
     const res = await fetch(`${pathServer}products`, {
         method: "POST",
@@ -251,3 +251,20 @@ async function saveIntroductionInServer(_product) {
 
     const data = await res.json();
 }
+
+
+const testData = {
+    name: "test",
+    features: ["a"],
+    explanation: "test",
+    images_urls: []
+};
+
+fetch("https://productshowcase-lhrz.onrender.com/products", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(testData)
+})
+.then(r => r.json())
+.then(console.log)
+.catch(console.error);
