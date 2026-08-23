@@ -241,6 +241,8 @@ function hideShowcase() {
 async function saveIntroductionInServer(_product) {
     const formData = new FormData();
     formData.append("product_string", JSON.stringify(_product));
+    console.log("imageFiles:", imageFiles);
+    console.log("تعداد:", imageFiles.length);
 
     //for (let image of imageFiles) {formData.append("image_files", image)}
 
