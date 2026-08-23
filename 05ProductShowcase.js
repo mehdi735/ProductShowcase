@@ -33,6 +33,9 @@ onload = async function () {
 }
 
 function createImageIntroduction() {
+    if (!src.startsWith("http")) {
+        src = "https://productshowcase-lhrz.onrender.com" + src;
+    }
     const imageInput = document.getElementById("imageInput");
     imageInput.addEventListener("change", function (){
         if (this.value.length === 0) {return;}
