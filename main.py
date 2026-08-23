@@ -75,3 +75,7 @@ def delete_all_product(db:Session=Depends(get_db)):
     db.query(ProductImage).delete()
     db.commit()
     return {"message": "deleted all"}
+
+@app.post("/test")
+def test(t:ProductCreate):
+    return t

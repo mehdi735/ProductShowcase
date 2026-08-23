@@ -260,7 +260,7 @@ const testData = {
     images_urls: []
 };
 
-fetch("https://productshowcase-lhrz.onrender.com/products", {
+fetch("https://productshowcase-lhrz.onrender.com/test", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(testData)
