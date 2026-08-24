@@ -258,4 +258,23 @@ async function saveIntroductionInServer(_product) {
     })
 
     const data = await res.json();
+    console.log(data);
 }
+
+async function test() {
+    const fd = new FormData();
+    fd.append("name", "test")
+    const res = await fetch(pathServer+"test", {
+    method: "POST",
+    body: fd
+    })
+
+    const data = await res.json();
+    console.log(data);
+}
+
+test()
+
+
+
+

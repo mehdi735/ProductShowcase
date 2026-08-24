@@ -77,5 +77,5 @@ def delete_all_product(db:Session=Depends(get_db)):
     return {"message": "deleted all"}
 
 @app.post("/test")
-def test(t:ProductCreate, db:Session=Depends(get_db)):
+def test(t:str=Form(...), db:Session=Depends(get_db)):
     return t
