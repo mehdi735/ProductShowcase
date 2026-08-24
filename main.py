@@ -56,7 +56,7 @@ def post_product(product_string:str=Form(...), image_files:List[UploadFile]=File
     for image in image_files:
         ext = image.filename.split(".")[-1]
         filename = f"{uuid.uuid4()}.{ext}"
-        path = f"/static/images/{filename}"
+        path = f"static/images/{filename}"
 
         with open(path, "wb") as i:
             i.write(image.file.read())
