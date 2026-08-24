@@ -1,5 +1,6 @@
 from fastapi import Depends, File, FastAPI, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from database import get_db, Product, ProductFeature, ProductImage, Base, engine
@@ -17,6 +18,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
+
+os.makedirs("static/images", exist_ok=True)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 class ProductCreate(BaseModel):
     name: str
@@ -46,8 +50,6 @@ def post_product(product_string:str=Form(...), image_files:List[UploadFile]=File
     new_product = Product(name=product.name, explanation=product.explanation)
     db.add(new_product)
     db.commit()
-
-    os.makedirs("static/images", exist_ok=True)
 
     for feature in product.features:
         new_feature = ProductFeature(name=feature, product_id=new_product.id)
