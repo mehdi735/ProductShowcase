@@ -58,7 +58,7 @@ function createImageIntroduction() {
 }
 
 function createElementImage(src, parent) {
-    if (!src.startsWith("http") && !src.startsWith("blob")) {
+    if (!src.startsWith("http")) {
         src = pathServer + src;
     }
 
