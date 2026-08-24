@@ -65,6 +65,7 @@ function createElementImage(src, parent) {
     const img = document.createElement("img");
     if (typeof(parent) === "string") {document.getElementById(parent).appendChild(img);}
     else {parent.appendChild(img)}
+    console.log(src);
     img.src = src;
     img.style.maxWidth = "300px";
     img.style.maxHeight = "300px";
