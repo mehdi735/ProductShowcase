@@ -32,8 +32,9 @@ onload = async function () {
     //if (localStorage.getItem("products")) {products=JSON.parse(localStorage.getItem("products"));}
 }
 
-function createImageIntroduction() {    
+function createImageIntroduction() {
     const imageInput = document.getElementById("imageInput");
+
     imageInput.addEventListener("change", function (){
         if (this.value.length === 0) {return;}
         const file = imageInput.files[0];
