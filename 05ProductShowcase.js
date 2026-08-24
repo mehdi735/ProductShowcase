@@ -32,11 +32,7 @@ onload = async function () {
     //if (localStorage.getItem("products")) {products=JSON.parse(localStorage.getItem("products"));}
 }
 
-function createImageIntroduction() {
-    if (!src.startsWith("http") && !src.startsWith("blob")) {
-        src = "https://productshowcase-lhrz.onrender.com" + src;
-    }
-    
+function createImageIntroduction() {    
     const imageInput = document.getElementById("imageInput");
     imageInput.addEventListener("change", function (){
         if (this.value.length === 0) {return;}
@@ -61,6 +57,10 @@ function createImageIntroduction() {
 }
 
 function createElementImage(src, parent) {
+    if (!src.startsWith("http") && !src.startsWith("blob")) {
+        src = "https://productshowcase-lhrz.onrender.com" + src;
+    }
+
     const img = document.createElement("img");
     if (typeof(parent) === "string") {document.getElementById(parent).appendChild(img);}
     else {parent.appendChild(img)}
