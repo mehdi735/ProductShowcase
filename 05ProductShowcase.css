@@ -21,10 +21,9 @@ body {text-align: center; direction: rtl;}
     justify-content: center;
     align-items: center;
     height: 100vh;
-    gap: 10px;
+    gap: 10px;}
 
-    button {width: 10%;}
-}
+.firstButton {width: 10%;}
 
 #createIntroduction {display: none;}
 
@@ -88,4 +87,61 @@ ul {list-style-position: inside;}
 
     width: 47px;
     height: 21px;
+}
+
+@media screen and (max-width: 600px) {
+    #saveButton {
+        width: 5vh;
+        margin-left: 40%;
+    }
+    #canselButton {
+        width: 5vh;
+    }
+
+    .firstButton {
+        width: 30%;
+        min-width: 90px;
+    }
+
+    #title {
+        font-size: 0.7rem;
+        width: 30%;
+        min-width: 124px;
+    }
+
+    #featuresInput { 
+        font-size: 0.7rem;
+        width: 30%;
+        min-width: 124px;
+    }
+
+    #explanation {
+        width: 90%;
+    }
+
+    #imagesLabel {
+        display: inline-block;
+        width: 20%;
+        min-width: 150px;
+    }
+
+    #createIntroduction > * {
+        margin-bottom: 5%;
+    }
+
+    #imagesIntroduction > * {
+        width: 30%;
+    }
+
+    #showcase {
+        gap: 5%;
+        #backOfPage {
+            left: 390px;
+            width: 7%;
+            height: 2%;
+        }
+        div {
+            width: 80%;
+        }
+    }
 }
