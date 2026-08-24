@@ -59,7 +59,7 @@ function createImageIntroduction() {
 
 function createElementImage(src, parent) {
     if (!src.startsWith("http") && !src.startsWith("blob")) {
-        src = "https://productshowcase-lhrz.onrender.com" + src;
+        src = pathServer + src;
     }
 
     const img = document.createElement("img");
