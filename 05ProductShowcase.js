@@ -263,7 +263,7 @@ async function saveIntroductionInServer(_product) {
 
 async function test() {
     const fd = new FormData();
-    fd.append("name", "test")
+    fd.append("t", "test")
     const res = await fetch(pathServer+"test", {
     method: "POST",
     body: fd
