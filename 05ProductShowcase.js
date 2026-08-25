@@ -6,7 +6,7 @@ let temporaryFeatures = [];
 
 const pathServer = "https://productshowcase-lhrz.onrender.com/" //"http://localhost:8000/"
 
-onload = async function () {
+async function fillProducts() {
     const res = await fetch(`${pathServer}products`);
     const data = await res.json();
 
@@ -309,6 +309,7 @@ async function test() {
     console.log(data);
 }
 
+fillProducts();
 test();
 
 
