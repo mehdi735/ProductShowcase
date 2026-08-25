@@ -32,6 +32,13 @@ onload = async function () {
     //if (localStorage.getItem("products")) {products=JSON.parse(localStorage.getItem("products"));}
 }
 
+function showSnackbar(text) {
+    const snackbar = document.getElementById("snackbar");
+    snackbar.innerText = text;
+    snackbar.className = "show";
+    setTimeout(function(){snackbar.className = snackbar.className.replace("show", "");}, 3000)
+}
+
 function createImageIntroduction() {
     const imageInput = document.getElementById("imageInput");
 
@@ -252,13 +259,41 @@ async function saveIntroductionInServer(_product) {
 
     for (let image of imageFiles) {formData.append("image_files", image)}
 
-    const res = await fetch(`${pathServer}products`, {
-        method: "POST",
-        body: formData
-    })
+    showSnackbar("در حال ذخیره کردن...");
 
-    const data = await res.json();
-    console.log(data);
+    try {
+        const res = await fetch(`${pathServer}products`, {
+            method: "POST",
+            body: formData
+        })
+
+	if (res.ok) {
+	    showSnackbar("محصول ذخیره شد.");
+	} else {showSnackbar("نتوانستیم محصول را ذخیره کنیم! کد: " + res.status);}
+
+        const data = await res.json();
+        console.log(data);
+    }
+    catch (err) {
+	showSnackbar("نتوانستیم ذخیره کنیم. ارور: " + err);
+    }
+}
+
+onload = async function checkConnectToServer() {
+    showSnackbar("در حال اتصال به سرور...");
+
+    try {
+        const res = await fetch(pathServer+"products");
+
+        if (res.ok) {showSnackbar("به سرور متصل شدید.");}
+        else {showSnackbar(`نتوانستیم به سرور متصل بشیم. خط: ${res.status}`);}
+        console.log(res.status);
+    }
+
+    catch (err) {
+	console.error("خطا:", err);
+	showSnackbar("ارور:"+err);
+    }
 }
 
 async function test() {
@@ -271,26 +306,6 @@ async function test() {
 
     const data = await res.json();
     console.log(data);
-}
-
-function showSnackbar(text) {
-    const snackbar = document.getElementById("snackbar");
-    snackbar.innerText = text;
-    snackbar.className = "show";
-    setTimeout(function(){snackbar.className = snackbar.className.replace("show", "");}, 3000)
-}
-
-onload = function checkInternet() {
-    const online = "متصل شدید.";
-    const offline = "اتصال قطع شد!";
-
-    console.log(navigator.onLine);
-    if (navigator.onLine) {showSnackbar(online);}
-    else {showSnackbar(offline);}
-
-    window.addEventListener("online", function() {showSnackbar(online)});
-
-    window.addEventListener("offline", function() {showSnackbar(offline)});
 }
 
 test();
