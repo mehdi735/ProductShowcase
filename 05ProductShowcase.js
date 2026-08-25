@@ -4,7 +4,7 @@ let imagesInput = [];
 let imageFiles = [];
 let temporaryFeatures = [];
 
-const pathServer = "http://localhost:8000/" //"https://productshowcase-lhrz.onrender.com/"
+const pathServer = "https://productshowcase-lhrz.onrender.com/" //"http://localhost:8000/"
 
 onload = async function () {
     const res = await fetch(`${pathServer}products`);
