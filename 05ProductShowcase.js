@@ -273,8 +273,26 @@ async function test() {
     console.log(data);
 }
 
-test()
+function showSnackbar(text) {
+    const snackbar = document.getElementById("snackbar");
+    snackbar.innerText = text;
+    snackbar.className = "show";
+    setTimeout(function(){snackbar.className = snackbar.className.replace("show", "");}, 3000)
+}
 
+onload = function checkInternet() {
+    const online = "متصل شدید.";
+    const offline = "اتصال قطع شد!";
 
+    console.log(navigator.onLine);
+    if (navigator.onLine) {showSnackbar(online);}
+    else {showSnackbar(offline);}
+
+    window.addEventListener("online", function() {showSnackbar(online)});
+
+    window.addEventListener("offline", function() {showSnackbar(offline)});
+}
+
+test();
 
 
