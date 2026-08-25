@@ -269,10 +269,11 @@ async function saveIntroductionInServer(_product) {
 
 	if (res.ok) {
 	    showSnackbar("محصول ذخیره شد.");
+            const data = await res.json();
+            console.log(data);
+
 	} else {showSnackbar("نتوانستیم محصول را ذخیره کنیم! کد: " + res.status);}
 
-        const data = await res.json();
-        console.log(data);
     }
     catch (err) {
 	showSnackbar("نتوانستیم ذخیره کنیم. ارور: " + err);
