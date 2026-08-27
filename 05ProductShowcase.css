@@ -163,11 +163,6 @@ ul {list-style-position: inside;}
 
     #showcase {
         gap: 5%;
-        #backOfPage {
-            left: 390px;
-            width: 7%;
-            height: 2%;
-        }
         div {
             width: 80%;
         }
