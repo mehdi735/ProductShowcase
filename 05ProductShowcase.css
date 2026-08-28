@@ -106,6 +106,16 @@ ul {list-style-position: inside;}
     button {background-color: yellow;}
 }
 
+#showcase.show {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+#showcase.noProduct {
+    display: flex;
+}
+
 #backOfPage {
     background-color: yellow;
 

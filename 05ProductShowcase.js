@@ -102,13 +102,13 @@ function addFeature() {
 function showCreateIntroduction() {
     document.getElementById("selectionPage").style.display = "none";
     document.getElementById("createIntroduction").style.display = "inline";
-    document.getElementById("showcase").style.display = "none";
+    document.getElementById("showcase").className = "";
 }
 
 function showSelectionPage() {
     document.getElementById("selectionPage").style.display = "flex";
     document.getElementById("createIntroduction").style.display = "none";
-    document.getElementById("showcase").style.display = "none";
+    document.getElementById("showcase").className = "";
 }
 
 function clearCreateIntroductionPage() {
@@ -126,6 +126,7 @@ function clearCreateIntroductionPage() {
 
 function clearShowcasePage() {
     const showcase = document.getElementById("showcase");
+    showcase.className = "";
     while (showcase.children[1]) {
         showcase.removeChild(showcase.children[1]);
     }
@@ -168,15 +169,16 @@ function showShowcase() {
     document.getElementById("selectionPage").style.display = "none";
     document.getElementById("createIntroduction").style.display = "none";
     const showcase = document.getElementById("showcase");
-    showcase.style.display = "grid";
-    showcase.style.gridTemplateColumns = "1fr 1fr 1fr";
-    showcase.style.gap = "20px";
 
     if (products.length === 0) {
+        showcase.className = "noProduct"
         const h1 = document.createElement("h1");
         showcase.appendChild(h1);
         h1.textContent = "هیچ محصولی در اینجا نیست";
         return;
+    }
+    else {
+        showcase.className = "show"
     }
 
     for (let i=0; i<products.length; i++) {
@@ -254,8 +256,6 @@ function hideShowcase() {
 async function saveIntroductionInServer(_product) {
     const formData = new FormData();
     formData.append("product_string", JSON.stringify(_product));
-    console.log("imageFiles:", imageFiles);
-    console.log("تعداد:", imageFiles.length);
 
     for (let image of imageFiles) {formData.append("image_files", image)}
 
