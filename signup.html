@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>sign Up</title>
+        <link rel="stylesheet" href="05ProductShowcase.css">
+    </head>
+
+    <body>
+        <Script src="05ProductShowcase.js"></Script>
+
+        <button id="backOfPage" onclick="backToIndexHTML()">برگشت</button>
+
+        <form id="signUp">
+            <div>
+                <label for="signUpFullNameInput">نام</label>
+                <input type="text" name="fullName" required placeholder="نامت را بنویس" id="signUpFullNameInput">
+            </div>
+
+            <div>
+                <label for="signUpUsernameInput">نام کاربری</label>
+                <input type="text" name="username" required placeholder="نام کاربری را بنویس. باید یکتا باشد!" id="signUpUsernameInput">
+            </div>
+
+            <div>
+                <label for="signUpPasswordInput">رمز عبور</label>
+                <input type="password" name="password" required placeholder="رمز عبور را بنویس" id="signUpPasswordInput">
+            </div>
+
+            <div>
+                <label for="signUpConfirmPasswordInput">تکرار رمز عبور</label>
+                <input type="password" name="confirmPassword" required placeholder="رمز عبور را تکرار کن" id="signUpConfirmPasswordInput">
+            </div>
+
+            <button type="submit" id="sendSignUpInterformation" onclick="signUp()">ثبت نام</button>
+
+        </form>
+    </body>
+</html>

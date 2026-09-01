@@ -10,12 +10,30 @@
     <body>
         <script src="05ProductShowcase.js"></script>
 
-	<div id="snackbar">this is test</div>
+	    <div id="snackbar">this is test</div>
+        <div id="authModal" class="modal">
+            <div class="modal-content">
+                <h3>نیاز به احراز هویت</h3>
+
+                <p>
+                    برای دسترسی به این بخش نخست باید 
+                    <a href="signup.html">ثبت نام کنید</a>
+                    یا اگر حساب دارید
+                    <a href="login.html">وارد حسابتان بشید</a>
+                </p>
+                <button onclick="closeModal()">بستن</button>
+            </div>
+        </div>
 
         <div id="selectionPage">
+            <h2 id="welcome"></h2>
+            <button id="buttonLogin" class="firstButton" onclick="location.href='login.html'">ورود</button>
+            <button id="buttonSignUp" class="firstButton" onclick="location.href='signup.html'">ثبت نام</button>
             <button id="introductionButton" class="firstButton" onclick="showCreateIntroduction()">معرفی محصول</button>
-            <button id="showcase-button" class="firstButton" onclick="showShowcase()">ویترین</button>
+            <button id="showcaseButton" class="firstButton" onclick="showShowcase()">ویترین</button>
         </div>
+
+        <script>checkAuth()</script>
 
         <div id="createIntroduction">
             <div id="editActionButtons">
@@ -42,7 +60,7 @@
         </div>
 
         <div id="showcase">
-            <button id="backOfPage" onclick="hideShowcase()">برگشت</button>
+            <button class="backOfPage" onclick="hideShowcase()">برگشت</button>
         </div>
 
     </body>

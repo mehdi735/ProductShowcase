@@ -9,6 +9,7 @@ class Product(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
     explanation = Column(String)
+    user_id = Column(Integer)
 
 class ProductFeature(Base):
     __tablename__ = "product_features"
@@ -21,6 +22,13 @@ class ProductImage(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     image_url = Column(String)
     product_id = Column(Integer)
+
+class User(Base):
+    __tablename__ = "user"
+    user_id = Column(Integer, primary_key=True, autoincrement=True)
+    full_name = Column(String)
+    username = Column(String, unique=True)
+    password = Column(String)
 
 Session = sessionmaker(bind=engine)
 

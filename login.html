@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>login</title>
+        <link rel="stylesheet" href="05ProductShowcase.css">
+    </head>
+
+    <body>
+        <script src="05ProductShowcase.js"></script>
+        <div id="snackbar">this is test</div>
+        <button id="backOfPage" onclick="backToIndexHTML()">برگشت</button>
+        <form id="login">
+            <div>
+                <label for="loginUsernameInput">نام کاربری</label>
+                <input type="text" name="username" required placeholder="نام کاربری را وارد کنید" id="loginUsernameInput">
+            </div>
+
+            <div>
+                <label for="loginPasswordInput">رمز عبور</label>
+                <input type="password" required placeholder="رمز عبور را وارد کنید" id="loginPasswordInput">
+            </div>
+
+            <button type="submit" id="sendLoginInformation" onclick="login()">ورود</button>
+        </form>
+    </body>
+</html>

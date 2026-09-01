@@ -1,10 +1,10 @@
-let product = {name: '', features: [], explanation: '', images_urls: []};
+let product = {name: '', features: [], explanation: '', images_urls: [], user_id: 0};
 let products = [];
 let imagesInput = [];
 let imageFiles = [];
 let temporaryFeatures = [];
 
-const pathServer = "https://productshowcase-lhrz.onrender.com/" //"http://localhost:8000/"
+const pathServer = "http://localhost:8000/" //"https://productshowcase-lhrz.onrender.com/"
 
 async function fillProducts() {
     const res = await fetch(`${pathServer}products`);
@@ -27,9 +27,7 @@ async function fillProducts() {
 
             products.push({name: name, features: features, explanation: explanation, images_urls: images_urls});
         }
-    };
-
-    //if (localStorage.getItem("products")) {products=JSON.parse(localStorage.getItem("products"));}
+    }
 }
 
 function showSnackbar(text) {
@@ -72,7 +70,6 @@ function createElementImage(src, parent) {
     const img = document.createElement("img");
     if (typeof(parent) === "string") {document.getElementById(parent).appendChild(img);}
     else {parent.appendChild(img)}
-    console.log(src);
     img.src = src;
     img.style.maxWidth = "300px";
     img.style.maxHeight = "300px";
@@ -100,6 +97,11 @@ function addFeature() {
 }
 
 function showCreateIntroduction() {
+    if (!localStorage.getItem("token")) {
+        document.getElementById("authModal").classList.add("show");
+        return
+    }
+
     document.getElementById("selectionPage").style.display = "none";
     document.getElementById("createIntroduction").style.display = "inline";
     document.getElementById("showcase").className = "";
@@ -146,17 +148,15 @@ function saveIntroduction() {
     product.features = temporaryFeatures;
     product.explanation = document.getElementById("explanation").value;
     product.images_urls = imagesInput;
+    product.user_id = localStorage.getItem("user_id");
 
     for (let key in product) {
         if (product[key].length === 0) {alert("تمام گزینه ها را پر کنید"); return;}
     }
 
     //We should new object for array with {}
-    products.push({name: product.name, features: product.features, explanation: product.explanation, images_urls: product.images_urls});
-    //localStorage.setItem("products", JSON.stringify(products));
+    products.push({name: product.name, features: product.features, explanation: product.explanation, images_urls: product.images_urls, user_id: product.user_id});
     saveIntroductionInServer(products[products.length-1]);
-    clearCreateIntroductionPage();
-    showSelectionPage();
 }
 
 function canselIntroduction() {
@@ -183,7 +183,7 @@ function showShowcase() {
 
     for (let i=0; i<products.length; i++) {
         const a_product = products[i];
-        const images_urls = a_product.images_urls
+        const images_urls = a_product.images_urls;
         const heroImage = images_urls[0];
         const title = a_product.name;
 
@@ -204,20 +204,21 @@ function showShowcase() {
         button.textContent = "اطلاعات بیشتر...";
         button.addEventListener(
             "click", function() {
-                showcase.style.display = "none";
+                showcase.className = "none";
                 const features = a_product.features
                 const showProduct = document.createElement("div");
-                showProduct.id = "showProduct"+i
+                showProduct.id = "showProduct"+i;
                 document.body.appendChild(showProduct);
 
                 const backButton = document.createElement("button");
-                backButton.id = "backOfPage";
+                backButton.className = "backOfPage";
                 backButton.textContent = "برگشت";
                 showProduct.appendChild(backButton);
                 backButton.width = "47px";
                 backButton.height = "23px";
                 backButton.addEventListener("click", function() {
-                    showcase.style.display = "grid"; clearPage(showProduct);
+                    showProduct.remove();
+                    showcase.className = "show";
                 })
 
                 const h1 = document.createElement("h1");
@@ -233,7 +234,7 @@ function showShowcase() {
 
                 const ul = document.createElement("ul");
                 showProduct.appendChild(ul);
-                ul.id = "productUl"
+                ul.id = "productUl";
                 
                 for (let i=0; i<features.length; i++) {
                     createElementList(features[i], ul);
@@ -269,8 +270,10 @@ async function saveIntroductionInServer(_product) {
 
 	if (res.ok) {
 	    showSnackbar("محصول ذخیره شد.");
-            const data = await res.json();
-            console.log(data);
+        clearCreateIntroductionPage();
+        showSelectionPage();
+        const data = await res.json();
+        console.log(data);
 
 	} else {showSnackbar("نتوانستیم محصول را ذخیره کنیم! کد: " + res.status);}
 
@@ -280,7 +283,152 @@ async function saveIntroductionInServer(_product) {
     }
 }
 
+function backToIndexHTML() {
+    location.href = "index.html";
+}
+
+async function signUp() {
+    document.getElementById("signUp").addEventListener("submit", async (e) => {e.preventDefault();})
+
+    const fullName = document.getElementById("signUpFullNameInput").value;
+    const username = document.getElementById("signUpUsernameInput").value;
+    const password = document.getElementById("signUpPasswordInput").value;
+    const confirmPassword = document.getElementById("signUpConfirmPasswordInput").value;
+
+    if (fullName === "" || username === "" || password.length === "" || confirmPassword === "") {return}
+
+    if (username.includes(" ")) {
+        showSnackbar("نام کاربری نباید فاصله داشته باشد");
+        return;
+    }
+
+    if (password.includes(" ")) {
+        showSnackbar("رمز نباید فاصله داشته باشد");
+        return;
+    }
+
+    if (password.length < 4) {
+        showSnackbar("رمز عبور باید بالای 4 حرف باشد");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        showSnackbar("تکرار رمز عبور نادرست هست");
+        return;
+    }
+
+    const user = {
+        "full_name": fullName,
+        "username": username,
+        "password": password,
+        "confirm_password": confirmPassword
+    }
+
+    try {
+        const res = await fetch(pathServer+"api/sign-up", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(user)
+        })
+        
+        const data = await res.json();
+    
+        if (res.ok) {
+            location.href = "index.html"
+            localStorage.setItem("token", data.token);
+            showSnackbar("با موفقیت ثبت نام کردید.");
+
+        } else {
+            showSnackbar(data.detail);
+            console.log(data);
+        }
+        
+    } catch (err) {
+        showSnackbar("نتوانستید به سرور متصل بشید."+err);
+        console.error("خطا ",err)
+    }
+}
+
+async function login() {
+    document.getElementById("login").addEventListener("submit", async (e) => {e.preventDefault();})
+    
+    const username = document.getElementById("loginUsernameInput").value;
+    const password = document.getElementById("loginPasswordInput").value;
+
+    if (username === "" || password === "") {return;}
+
+    const user = {
+        "username": username,
+        "password": password
+    }
+
+    try {
+        const res = await fetch(pathServer+"api/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(user)
+        })
+    
+        const data = await res.json();
+        console.log(data);
+
+        if (res.ok) {
+            localStorage.setItem("token", data.token)
+            showSnackbar("وارد حسابتان شدید");
+            location.href = "index.html";
+
+        } else {showSnackbar(data.detail);}
+
+    }catch (err) {
+        console.error(err)
+        showSnackbar("خطا: "+err)
+    }
+}
+
+function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("full_name");
+}
+
+async function checkAuth() {
+    if (!location.pathname.includes("index.html")) {return}
+
+    const token = localStorage.getItem("token");
+    if (!token) {return;}
+
+    try {
+        const res = await fetch(pathServer+"api/verify-token", {
+            headers: {"Authorization": "Bearer " + token}
+        })
+
+        if (res.ok) {
+            const data = await res.json();
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("full_name", data.full_name);
+            localStorage.setItem("user_id", data.user_id);
+            document.getElementById("buttonLogin").style.display = "none";
+            document.getElementById("buttonSignUp").style.display = "none";
+            document.getElementById("welcome").innerText = data.message;
+
+        } else {
+            localStorage.removeItem("token");
+            localStorage.removeItem("username");
+            localStorage.removeItem("full_name");
+            localStorage.removeItem("user_id");
+        }
+
+    }catch (err) {
+        console.error("خطا در بررسی توکن: "+err);
+    }
+}
+
+function closeModal() {
+    document.getElementById("authModal").classList.remove("show")
+}
+
 onload = async function checkConnectToServer() {
+    if (!location.pathname.includes("index.html")) {return;}
     showSnackbar("در حال اتصال به سرور...");
 
     try {
@@ -297,19 +445,4 @@ onload = async function checkConnectToServer() {
     }
 }
 
-async function test() {
-    const fd = new FormData();
-    fd.append("t", "test")
-    const res = await fetch(pathServer+"test", {
-    method: "POST",
-    body: fd
-    })
-
-    const data = await res.json();
-    console.log(data);
-}
-
 fillProducts();
-test();
-
-
