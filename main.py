@@ -1,4 +1,5 @@
 from fastapi import Depends, File, Form, Header, FastAPI, UploadFile, HTTPException
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -60,6 +61,14 @@ def decode_token(authorization:str):
     token = authorization.replace("Bearer ", "")
     payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
     return payload
+
+@app.get("/manifest.json")
+async def manifest():
+    return FileResponse("manifest.json")
+
+@app.get("/sw.js")
+async def sw():
+    return FileResponse("sw.js")
 
 @app.get("/products")
 def get_all_product(db:Session=Depends(get_db)):

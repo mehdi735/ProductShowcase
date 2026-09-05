@@ -4,7 +4,7 @@ let imagesInput = [];
 let imageFiles = [];
 let temporaryFeatures = [];
 
-const pathServer = "http://localhost:8000/" //"https://productshowcase-lhrz.onrender.com/"
+const pathServer = "https://productshowcase-lhrz.onrender.com/" //"http://localhost:8000/"
 
 async function fillProducts() {
     const res = await fetch(`${pathServer}products`);
@@ -446,3 +446,11 @@ onload = async function checkConnectToServer() {
 }
 
 fillProducts();
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js")
+            .then(() => console.log("sw ثبت شد"))
+            .catch((err) => console.log(err));
+    })
+}
