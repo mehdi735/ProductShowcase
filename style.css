@@ -11,6 +11,7 @@ body {text-align: center; direction: rtl;}
     position: fixed;
     left: 50%;
     top: 35px;
+    z-index: 9999;
 }
 
 #snackbar.show {
@@ -31,7 +32,7 @@ body {text-align: center; direction: rtl;}
 .modal {
     display: none;
     position: fixed;
-    z-index: 9999;
+    z-index: 999999;
     left: 0;
     top: 0;
     width: 100%;
