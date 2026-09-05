@@ -93,6 +93,7 @@ body {text-align: center; direction: rtl;}
     width: 10%;
     max-width: 80px;
     min-width: 50px;
+    max-height: 21px;
 }
 
 #login {
@@ -115,6 +116,7 @@ body {text-align: center; direction: rtl;}
     width: 10%;
     max-width: 80px;
     min-width: 50px;
+    max-height: 21px;
 }
 
 #editActionButtons {
