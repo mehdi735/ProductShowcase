@@ -91,6 +91,7 @@ body {text-align: center; direction: rtl;}
     right: 13%;
     top: 10px;
     width: 10%;
+    max-width: 80px;
     min-width: 50px;
     max-height: 21px;
 }
@@ -113,6 +114,7 @@ body {text-align: center; direction: rtl;}
     right: 5%;
     top: 10px;
     width: 10%;
+    max-width: 80px;
     min-width: 50px;
     max-height: 21px;
 }
@@ -226,10 +228,12 @@ ul {list-style-position: inside;}
     }
 
     #buttonSignUp {
+        font-size: 10px;
         right: 30%;
     }
 
     #buttonLogin {
+        font-size: 10px;
         right: 13%;
     }
 
