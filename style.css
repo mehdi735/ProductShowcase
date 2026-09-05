@@ -91,7 +91,7 @@ body {text-align: center; direction: rtl;}
     right: 13%;
     top: 10px;
     width: 10%;
-    max-width: 80px;
+    max-width: 90px;
     min-width: 50px;
     max-height: 21px;
 }
@@ -228,7 +228,7 @@ ul {list-style-position: inside;}
     }
 
     #buttonSignUp {
-        right: 35%;
+        right: 30%;
     }
 
     #buttonLogin {
@@ -275,5 +275,15 @@ ul {list-style-position: inside;}
         div {
             width: 80%;
         }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #buttonSignUp {
+        right: 35%;
+    }
+
+    #buttonLogin {
+        right: 13%;
     }
 }
